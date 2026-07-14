@@ -1,27 +1,27 @@
-from sqlalchemy import Column, Integer, String, Boolena, Date, Foreignkey
+from sqlalchemy import Column, Integer, String, Boolean, Date, ForeignKey
 from datetime import date
 from app.database import Base
 
 
-class LibroMode1(Base):
+class LibroModel(Base):
     __tablename__ = "libros"
     id = Column(Integer, primary_key=True, index=True)
     titulo = Column(String, nullable=False)
     autor = Column(String, nullable=False)
-    disponible = Column(Boolena, default=True)
+    disponible = Column(Boolean, default=True)
 
 
-class EstudianteMode1(Base):
+class EstudianteModel(Base):
     __tablename__ = "estudiantes"
     id = Column(Integer, primary_key=True, index=True)
     nombre = Column(String, nullable=False)
     carrera = Column(String, nullable=False)
 
 
-class PrestamoMode1(Base):
+class PrestamoModel(Base):
     __tablename__ = "prestamo"
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    libro_id = Column(Integer, Foreignkey("libros.id"), nullable=False)
-    estudiante_id = Column(Integer, Foreignkey("estudiantes.id"), nullable=False)
+    libro_id = Column(Integer, ForeignKey("libros.id"), nullable=False)
+    estudiante_id = Column(Integer, ForeignKey("estudiantes.id"), nullable=False)
     fecha_prestamo = Column(Date, default=date.today)
-    devuelto = Column(Boolena, default=True)
+    devuelto = Column(Boolean, default=True)
